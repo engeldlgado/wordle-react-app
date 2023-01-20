@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react'
 import Box from '../Box'
 import words from '../../words'
 
-function removeAccents (word) {
-  return word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+function removeAccents (input) {
+  input = input.toUpperCase().replace(/[\W_]/g, '')
+  return input.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 }
 
 const noAccentsWords = words.map(word => removeAccents(word))
-const correctWord = noAccentsWords[Math.floor(Math.random() * noAccentsWords.length)].toUpperCase()
+const fiveLetterWords = noAccentsWords.filter(word => word.length === 5)
+const correctWord = fiveLetterWords[Math.floor(Math.random() * fiveLetterWords.length)].toUpperCase()
 const defaulBoard = []
 const defaultLetters = []
 
@@ -23,6 +25,7 @@ for (let i = 0; i < 5; i++) {
 
 function Board (props) {
   const [correct, setCorrect] = useState('')
+  console.log('correct', correct)
   const [letters, setLetters] = useState(defaultLetters)
   const [board, setBoard] = useState(defaulBoard)
   const [changed, setChanged] = useState(false)
@@ -38,7 +41,7 @@ function Board (props) {
       setLost(false)
 
       // get new word
-      const newWord = noAccentsWords[Math.floor(Math.random() * noAccentsWords.length)].toUpperCase()
+      const newWord = fiveLetterWords[Math.floor(Math.random() * fiveLetterWords.length)].toUpperCase()
       setCorrect(newWord)
       // clear board
       const newBoard = []
@@ -92,7 +95,7 @@ function Board (props) {
               for (let i = 0; i < 5; i++) {
                 word += prevBoard[row][i][0]
               }
-              if (correctWord.includes(word.toUpperCase())) {
+              if (fiveLetterWords.includes(word.toUpperCase())) {
                 for (let i = 0; i < 5; i++) {
                   if (correct[i] === prevBoard[row][i][0]) {
                     prevBoard[row][i][1] = 'C'
