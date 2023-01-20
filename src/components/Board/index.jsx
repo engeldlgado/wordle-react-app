@@ -25,7 +25,6 @@ for (let i = 0; i < 5; i++) {
 
 function Board (props) {
   const [correct, setCorrect] = useState('')
-  console.log('correct', correct)
   const [letters, setLetters] = useState(defaultLetters)
   const [board, setBoard] = useState(defaulBoard)
   const [changed, setChanged] = useState(false)
