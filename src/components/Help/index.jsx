@@ -42,7 +42,7 @@ function Help ({ handleClose }) {
         <Box value='O' />
       </div>
       <p className='text-sm text-zinc-500 dark:text-zinc-300'>
-        La letra <b>O</b> no está en la palabra.
+        La letra <b>A</b> no está en la palabra.
       </p>
 
       <p className='mt-6 text-sm italic text-zinc-500 dark:text-zinc-300'>
